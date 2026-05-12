@@ -24,7 +24,7 @@ public final class AppConstants {
      * Replace {@code "YOUR_API_KEY_HERE"} before running the app.
      */
     public static final String API_KEY =
-            "67b396d395da01592e86943e";
+            "ENTER_API_KEY";
 
     /**
      * Base URL template.  {KEY} and {BASE} are replaced at runtime
