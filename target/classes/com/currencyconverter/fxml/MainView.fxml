@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.currencyconverter.controller.MainController"
+            styleClass="root-pane">
+
+    <top>
+        <VBox styleClass="header-bar" alignment="CENTER">
+            <Label text="CurrencyFX" styleClass="app-title"/>
+            <Label text="Real-Time Currency Converter" styleClass="app-subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="main-scroll" hbarPolicy="NEVER">
+            <VBox styleClass="main-content" spacing="24">
+                <padding><Insets top="28" right="40" bottom="28" left="40"/></padding>
+
+                <!-- Converter Card -->
+                <VBox styleClass="card" spacing="22">
+                    <padding><Insets top="28" right="32" bottom="28" left="32"/></padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="⇄" styleClass="card-icon"/>
+                        <Label text="Convert" styleClass="card-title"/>
+                    </HBox>
+
+                    <Separator styleClass="card-divider"/>
+
+                    <!-- From | SWAP | To -->
+                    <HBox spacing="12" alignment="CENTER">
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="FROM" styleClass="field-label"/>
+                            <ComboBox fx:id="cbFromCurrency"
+                                      styleClass="currency-combo"
+                                      maxWidth="Infinity"
+                                      promptText="Search currency..."/>
+                        </VBox>
+
+                        <VBox alignment="BOTTOM_CENTER" minWidth="56">
+                            <Button fx:id="btnSwap"
+                                    text="&#x21CC;"
+                                    styleClass="swap-btn"
+                                    onAction="#onSwap"
+                                    minWidth="56" minHeight="40">
+                                <tooltip><Tooltip text="Swap currencies"/></tooltip>
+                            </Button>
+                        </VBox>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="TO" styleClass="field-label"/>
+                            <ComboBox fx:id="cbToCurrency"
+                                      styleClass="currency-combo"
+                                      maxWidth="Infinity"
+                                      promptText="Search currency..."/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Amount -->
+                    <VBox spacing="6">
+                        <Label text="AMOUNT" styleClass="field-label"/>
+                        <TextField fx:id="tfAmount"
+                                   styleClass="amount-field"
+                                   promptText="Enter amount (e.g. 1000)"
+                                   maxWidth="Infinity"/>
+                    </VBox>
+
+                    <!-- Convert Button -->
+                    <HBox alignment="CENTER" spacing="16">
+                        <Button fx:id="btnConvert"
+                                text="CONVERT"
+                                styleClass="convert-btn"
+                                defaultButton="true"
+                                onAction="#onConvert"
+                                minWidth="200" minHeight="46"/>
+                        <ProgressIndicator fx:id="progressIndicator"
+                                           styleClass="spinner"
+                                           prefWidth="32" prefHeight="32"/>
+                    </HBox>
+
+                    <!-- Result Box -->
+                    <VBox styleClass="result-box" alignment="CENTER" spacing="8">
+                        <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+                        <Label fx:id="lblResult"
+                               text="---"
+                               styleClass="result-label"
+                               wrapText="true"
+                               textAlignment="CENTER"/>
+                        <Label fx:id="lblRate"
+                               text=""
+                               styleClass="rate-label"/>
+                    </VBox>
+
+                    <!-- Status -->
+                    <Label fx:id="lblStatus"
+                           text=""
+                           styleClass="status-label"
+                           alignment="CENTER"
+                           maxWidth="Infinity"/>
+
+                </VBox>
+
+                <!-- History Card -->
+                <VBox styleClass="card" spacing="16">
+                    <padding><Insets top="24" right="32" bottom="24" left="32"/></padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="History" styleClass="card-icon"/>
+                        <Label text="Conversion History" styleClass="card-title"
+                               HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="btnViewHistory"
+                                text="REFRESH"
+                                styleClass="history-btn"
+                                onAction="#onViewHistory"/>
+                    </HBox>
+
+                    <Separator styleClass="card-divider"/>
+
+                    <TableView fx:id="tblHistory"
+                               styleClass="history-table"
+                               maxHeight="300"
+                               minHeight="180">
+                        <columns>
+                            <TableColumn fx:id="colFrom"      text="FROM"           minWidth="70"  maxWidth="90"/>
+                            <TableColumn fx:id="colTo"        text="TO"             minWidth="70"  maxWidth="90"/>
+                            <TableColumn fx:id="colAmount"    text="AMOUNT"         minWidth="110"/>
+                            <TableColumn fx:id="colResult"    text="CONVERTED"      minWidth="120"/>
+                            <TableColumn fx:id="colRate"      text="RATE"           minWidth="110"/>
+                            <TableColumn fx:id="colTimestamp" text="TIMESTAMP (UTC)" minWidth="160"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Click REFRESH to load conversion history."
+                                   styleClass="table-placeholder"/>
+                        </placeholder>
+                    </TableView>
+
+                </VBox>
+
+                <Region minHeight="12"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
