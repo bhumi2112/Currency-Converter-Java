@@ -35,13 +35,13 @@ public final class DatabaseUtil {
     private static final String DATABASE = "currency_converter_db";
 
     /** MySQL user that has SELECT / INSERT rights on the database. */
-    private static final String USER     = "root";
+    private static final String USER     = "User_name";
 
     /**
      * Password for the MySQL user above.
      * Replace {@code "----"} with your actual password.
      */
-    private static final String PASSWORD = "Root@123";
+    private static final String PASSWORD = "******";
 
     // ---------------------------------------------------------------
     // Internal — derived JDBC URL
